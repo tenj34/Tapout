@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+
+  get '/users/:id' do
+    if logged_in?
+      @user = current_user
+      erb :'/users/show'
+    else
+      redirect to '/login'
+    end
+  end
+
   get '/signup' do
     erb :'/signup'
   end
@@ -14,16 +24,11 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:id' do
-    if logged_in?
-      @user = current_user
-      erb :'/users/show'
-    else
-      redirect to '/login'
-    end
-  end
-
   get '/login' do
-    erb :'users/login'
+    if !logged_in?
+      erb :'/users/login'
+    else
+      redirect to "/users/#{current_user.id}"
+    end
   end
 end
