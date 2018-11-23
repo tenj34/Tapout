@@ -31,4 +31,16 @@ class UsersController < ApplicationController
       redirect to "/users/#{current_user.id}"
     end
   end
+
+  post '/login' do
+    @user = User.find_by(username: params[:user][:username])
+    if @user && @user.authenticate(params[:user][:password])
+      session[:user_id] = @user.id
+      redirect to "/users/#{@user.id}"
+    else
+      flash[:message] = "It looks like there was an error, please try again."
+      redirect to "/login"
+    end
+  end
+  
 end
