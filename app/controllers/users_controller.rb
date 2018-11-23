@@ -3,6 +3,17 @@ class UsersController < ApplicationController
     erb :'/signup'
   end
 
+  post '/signup' do
+    @user = User.create(username: params[:user][:username], password: params[:user][:password])
+    if @user.save
+      session[:user_id] = @user.id
+      redirect to "/users/#{@user.id}"
+    else
+      flash[:message] = "It looks like there was an error, please try again."
+      redirect to "/signup"
+    end
+  end
+
   get '/login' do
     erb :'users/login'
   end
