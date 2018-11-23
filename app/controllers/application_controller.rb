@@ -11,6 +11,10 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "starboy"
   end
 
+  post "/set-flash" do
+    flash[:message] = "It looks like there was an error, please try again."
+  end
+
   get "/" do
     erb :'index'
   end
