@@ -14,6 +14,15 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:id' do
+    if logged_in?
+      @user = current_user
+      erb :'/users/show'
+    else
+      redirect to '/login'
+    end
+  end
+
   get '/login' do
     erb :'users/login'
   end
