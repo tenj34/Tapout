@@ -1,0 +1,11 @@
+<h1> Welcome <%= @user.username %></h1>
+
+<form method="POST" action="/days">
+  Month: <input type="integer" name="days[month]" /><br />
+  Date: <input type="integer" name="days[date]" /><br />
+  Year: <input type="integer" name="days[year]" /><br />
+  <input type="submit" />
+</form>
+
+<p><h5><a href="/users/show">Home</a></h5></p>
+<p><h5><a href="/logout">Log Out</a></h5></p>
